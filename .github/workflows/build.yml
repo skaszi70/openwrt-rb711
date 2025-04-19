@@ -25,16 +25,9 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Copy .config
-        run: cp $GITHUB_WORKSPACE/.config openwrt/.config
-
-      - name: Configure build
-        run: |
-          cd openwrt
-          make olddefconfig
-
       - name: Build firmware
         run: |
+          cp $GITHUB_WORKSPACE/.config openwrt/.config
           cd openwrt
           make -j$(nproc)
 
